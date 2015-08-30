@@ -1,0 +1,23 @@
+#!/bin/bash
+
+#DIR=$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )
+#echo "$DIR"
+
+#exit
+
+# get first parameter
+DEVICE="$1"
+CRC=NO
+
+
+while [[ "$CRC" == *NO ]]; do
+
+TEXT=`cat /sys/bus/w1/devices/$DEVICE/w1_slave`
+#echo "$TEXT"
+CRC=`echo "$TEXT" | tail -n 2`
+TEMP=`echo "$TEXT" | tail -n 1 | cut -d'=' -f2`
+VAL=`echo "scale=3; $TEMP/1000" | bc`
+
+done
+
+echo "$VAL"
