@@ -1,0 +1,35 @@
+#!/bin/bash
+
+#sudo modprobe w1-gpio
+#sudo modprobe w1-therm
+
+# CREATE TABLE temperature (id INT AUTO_INCREMENT KEY, sensor INT, value DOUBLE, date TIMESTAMP DEFAULT CURRENT_TIMESTAMP);
+
+while true; do
+
+TEXT=`cat /sys/bus/w1/devices/28-000006b080be/w1_slave`
+
+TEMP=`echo "$TEXT" | tail -n 1 | cut -d'=' -f2`
+#TEMP=`cat /sys/bus/w1/devices/28-000006b080be/w1_slave | tail -n 1 | cut -d'=' -f2`
+
+VAL=`echo "scale=3; $TEMP/1000" | bc`
+
+TEXT1=`cat /sys/bus/w1/devices/28-000006b18a9c/w1_slave`
+TEMP1=`echo "$TEXT1" | tail -n 1 | cut -d'=' -f2`
+VAL1=`echo "scale=3; $TEMP1/1000" | bc`
+
+TEXT2=`cat /sys/bus/w1/devices/10-000802dbc43f/w1_slave`
+TEMP2=`echo "$TEXT2" | tail -n 1 | cut -d'=' -f2`
+VAL2=`echo "scale=3; $TEMP2/1000" | bc`
+
+#LOGTEXT=`echo "$TEXT $TEXT1 $TEXT2" | tr '\n' ' '`
+LOGTEXT="$TEXT\n$TEXT1\n$TEXT2"
+
+PROCTEMPTEXT=`sudo /opt/vc/bin/vcgencmd measure_temp`
+PROCTEMP=`echo "$PROCTEMPTEXT" | cut -d'=' -f2 | cut -d"'" -f1`
+
+mysql -u kovi -e "USE ajto; INSERT INTO temperature VALUES(null, 0, $VAL, null, $VAL1, $VAL2, $PROCTEMP, '$LOGTEXT');"
+
+sleep 59
+done
+
