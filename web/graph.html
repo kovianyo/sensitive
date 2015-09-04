@@ -4,20 +4,56 @@
 </head>
 <body>
 <h1>Kovi temperature log</h1>
-<div id="graphdiv" style="width:100%; height:300px;"></div>
+<h2>Room</h2>
+<div id="roomgraphdiv" style="width:100%; height:300px;"></div>
+
+<h2>Fridge</h2>
+<div id="fridgegraphdiv" style="width:100%; height:300px;"></div>
+
+<h2>Proc</h2>
+<div id="procgraphdiv" style="width:100%; height:300px;"></div>
+
 <script type="text/javascript">
-  g = new Dygraph(
+  var roomgraph = new Dygraph(
 
     // containing div
-    document.getElementById("graphdiv"),
+    document.getElementById("roomgraphdiv"),
 
-    "data.php", // path to CSV file
+    "data.php?type=room", // path to CSV file
               // options
     {
       rollPeriod: 60,
       showRoller: true
     }
   );
+
+
+  var fridgegraph = new Dygraph(
+
+    // containing div
+    document.getElementById("fridgegraphdiv"),
+
+    "data.php?type=fridge", // path to CSV file
+              // options
+    {
+      rollPeriod: 1,
+      showRoller: true
+    }
+  );
+
+  var procgraph = new Dygraph(
+
+    // containing div
+    document.getElementById("procgraphdiv"),
+
+    "data.php?type=proc", // path to CSV file
+              // options
+    {
+      rollPeriod: 60,
+      showRoller: true
+    }
+  );
+
 </script>
 </body>
 </html>
