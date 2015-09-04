@@ -1,0 +1,43 @@
+#!/bin/bash
+
+# check wether it already runs
+COUNT=`ps aux | grep sense | wc -l`
+
+if [ "$COUNT" -gt "3" ]; then
+        echo "sense already running"
+        exit
+fi
+
+# export if not exported
+# if file not exists
+if [ ! -f /sys/class/gpio/gpio3/value ];
+then
+	echo "3" > /sys/class/gpio/export
+	echo "in" > /sys/class/gpio/gpio3/direction
+fi
+
+#echo "4" > /sys/class/gpio/export
+#echo "in" > /sys/class/gpio/gpio4/direction
+
+VAL=`cat /sys/class/gpio/gpio3/value`
+LAST=`cat /sys/class/gpio/gpio3/value`
+
+while true; do
+VAL=`cat /sys/class/gpio/gpio3/value`
+if [ $VAL != $LAST ]
+then
+#echo -n $VAL
+#echo -n " "
+#date
+if [ $VAL == "0" ]
+then
+mysql -u kovi -e 'use ajto; insert into log values(null, 1, null);'
+else
+mysql -u kovi -e 'use ajto; insert into log values(null, 0, null);'
+fi
+LAST=$VAL
+fi
+sleep 0.1
+done
+
+#echo "3" > /sys/class/gpio/unexport
