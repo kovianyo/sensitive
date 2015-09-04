@@ -1,5 +1,12 @@
 #!/bin/bash
 
+# CREATE TABLE `log` (
+#  `id` int(11) NOT NULL AUTO_INCREMENT,
+#  `state` int(11) DEFAULT NULL,
+#  `date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+#  PRIMARY KEY (`id`)
+# )
+
 # check wether it already runs
 COUNT=`ps aux | grep sense | wc -l`
 
@@ -15,9 +22,6 @@ then
 	echo "3" > /sys/class/gpio/export
 	echo "in" > /sys/class/gpio/gpio3/direction
 fi
-
-#echo "4" > /sys/class/gpio/export
-#echo "in" > /sys/class/gpio/gpio4/direction
 
 VAL=`cat /sys/class/gpio/gpio3/value`
 LAST=`cat /sys/class/gpio/gpio3/value`
