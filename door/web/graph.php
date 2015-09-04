@@ -216,16 +216,14 @@ echo "<div style='padding-bottom:10px;'><a href='?'>[hours]</a> <a href='?type=d
 
 if (isset($_GET["type"]) && $_GET["type"] == "daily")
   {
-
     echo '<div style="margin-left:10px; margin-right:20px;">';
     RenderTimeTable();
-    for ($i = 0; $i < 20; $i++)
+    $dayLimit = 14;
+    for ($i = 0; $i < $dayLimit; $i++)
       {
 	RenderNap($mysqli, $i);
       }
     echo '</div>';
-
-
   }
 else
   {
