@@ -1,0 +1,13 @@
+#!/bin/bash
+
+# cron command:
+# sudo -u kovi bash -c 'cd /home/kovi/kovi/data; ./dump'
+
+mysqldump --databases ajto --tables log > log_dump.sql
+mysqldump --databases ajto --tables temperature > temperature_dump.sql
+
+git add log_dump.sql
+git add temperature_dump.sql
+git commit -m update
+git push
+
