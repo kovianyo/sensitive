@@ -1,49 +1,5 @@
 <?php
 
-class GraphMobile
-{
-
-
-  function Render($rows)
-  {
-    $maxcount = 0;
-
-    foreach ($rows as $row) { if ($row["count"] > $maxcount) $maxcount = $row["count"];  }
-
-    $result .= '<div style="width:800px; border: 1px solid black; padding: 4px;">';
-
-    $result .= '<div style="height: 20px; width:100%; margin-bottom: 5px;">';
-    foreach ($rows as $row)
-      {
-        $result .= '<div style="background-color: white; width: 4.16%; float:left; text-align: center;">' . $row["count"] . '</div>';
-      }
-    $result .= '</div>';
-
-
-    $result .= '<div style="background-color: blue; height: 100px; width:100%; margin-bottom: 6px;">';
-    foreach ($rows as $row)
-      {
-        $height = (1 - $row["count"] / $maxcount) * 100;
-        
-        if ($height == 0) $height = 1; // so that the div is rendered
-        $result .= '<div style="background-color: white; height: ' . $height . '%; width: 4.16%; float:left;"></div>';
-      }
-    $result .= '</div>';
-
-    $result .= '<div style="height: 20px; width:100%; margin-bottom: 5px;">';
-    foreach ($rows as $row)
-      {
-        $result .= '<div style="width: 4.16%; float:left; text-align: center;">' . $row["hour"] . '</div>';
-      }
-    $result .= '</div>';
-
-    $result .= '</div>';
-
-    return $result;
-  }
-
-}
-
 // TODO: css
 
 class Graph
@@ -280,21 +236,6 @@ else
 
     $weekdays = FillUntil($weekdays, "hour", 23);
     $weekend = FillUntil($weekend, "hour", 23);
-
-    //echo $_SERVER["HTTP_USER_AGENT"];
-
-    // include 'Mobile-Detect-2.5.9/Mobile_Detect.php';
-    // $detect = new Mobile_Detect();
- 
-    // Check for any mobile device.
-    // if ($detect->isMobile())
-    //  {
-    //	$graph = new GraphMobile();
-    //  }
-    // else
-    //  {
-    //	$graph = new Graph();
-    //  }
 
     $graph = new Graph();
 
