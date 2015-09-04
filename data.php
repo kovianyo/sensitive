@@ -6,7 +6,7 @@ if ($mysqli->connect_errno) {
 }
 
 
-echo "Date,Temperature,Fridge,Balcon\n";
+echo "Date,Room,Fridge,Balcon\n";
 
 $rows = $mysqli->query("SELECT * FROM temperature WHERE date > DATE_SUB(NOW(), INTERVAL 5 DAY)-- WHERE value > 0 AND value1 > 0");
 
