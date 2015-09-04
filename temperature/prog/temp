@@ -3,7 +3,17 @@
 #sudo modprobe w1-gpio
 #sudo modprobe w1-therm
 
-# CREATE TABLE temperature (id INT AUTO_INCREMENT KEY, sensor INT, value DOUBLE, date TIMESTAMP DEFAULT CURRENT_TIMESTAMP);
+# CREATE TABLE `temperature` (
+#  `id` int(11) NOT NULL AUTO_INCREMENT,
+#  `sensor` int(11) DEFAULT NULL,
+#  `value` double DEFAULT NULL,
+#  `date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+#  `value1` double DEFAULT NULL,
+#  `value2` double DEFAULT NULL,
+#  `value3` double DEFAULT NULL,
+#  `log` text,
+#  PRIMARY KEY (`id`)
+#)
 
 # containing dir
 DIR=$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )
