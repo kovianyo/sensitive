@@ -1,5 +1,9 @@
 #!/bin/bash
 
+# http://www.modmypi.com/blog/ds18b20-one-wire-digital-temperature-sensor-and-the-raspberry-pi
+# Add the following line to /boot/config.txt
+# dtoverlay=w1-gpio
+
 #sudo modprobe w1-gpio
 #sudo modprobe w1-therm
 
