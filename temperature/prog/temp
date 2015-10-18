@@ -4,6 +4,8 @@
 # Add the following line to /boot/config.txt
 # dtoverlay=w1-gpio
 
+# sudo apt-get install bc
+
 #sudo modprobe w1-gpio
 #sudo modprobe w1-therm
 
