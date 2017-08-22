@@ -1,7 +1,7 @@
 #!/bin/bash
 
-# cron command:
-# sudo -u kovi bash -c 'cd /home/kovi/kovi/data; ./dump'
+# crontab line:
+# 12 03 * * * sudo -u kovi bash -c 'cd /home/kovi/kovi/data/log; ./dump'
 
 mysqldump --databases ajto --tables log > log_dump.sql
 mysqldump --databases ajto --tables temperature > temperature_dump.sql
