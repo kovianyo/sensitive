@@ -1,0 +1,5 @@
+#!/bin/bash
+
+VAL1=`./readtemp 28-000006b18a9c`
+
+echo "val:$VAL:"
