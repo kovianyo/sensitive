@@ -1,0 +1,22 @@
+#!/bin/bash
+
+#ps aux | grep sense | wc -l
+
+#echo `ps aux |grep test`
+
+COUNT=`ps aux | grep test | wc -l`
+echo "$COUNT"
+
+if [ "$COUNT" -gt "3" ]; then
+	echo "already running"
+	exit
+else
+	echo "starting"
+fi
+
+echo szia
+
+while true; do
+sleep 0.1
+done
+
