@@ -22,7 +22,8 @@ if ($_GET["type"] == "fridge")
 {
   echo "Date,Fridge\n";
 
-  $rows = $mysqli->query("SELECT date, value1 FROM temperature WHERE date > DATE_SUB(NOW(), INTERVAL 5 DAY)-- WHERE value > 0 AND value1 > 0");
+  // $rows = $mysqli->query("SELECT date, CASE WHEN value1 IS NOT NULL THEN value1 ELSE 0 END AS value1 FROM temperature WHERE date > DATE_SUB(NOW(), INTERVAL 5 DAY)");
+  $rows = $mysqli->query("SELECT date, value1 FROM temperature WHERE date > DATE_SUB(NOW(), INTERVAL 5 DAY) AND value1 > 0 AND value1 < 80");
 
   foreach ($rows as $row)
     {
