@@ -32,12 +32,26 @@ VAL1=`"$DIR"/readtemp 28-000006b18a9c`
 
 VAL2=`"$DIR"/readtemp 10-000802dbc43f`
 
+
+if [ "$VAL" == "" ]; then
+  VAL="null"
+fi
+
+if [ "$VAL1" == "" ]; then
+  VAL1="null"
+fi
+
+if [ "$VAL2" == "" ]; then
+  VAL2="null"
+fi
+
 LOGTEXT=""
 
 PROCTEMPTEXT=`sudo /opt/vc/bin/vcgencmd measure_temp`
 PROCTEMP=`echo "$PROCTEMPTEXT" | cut -d'=' -f2 | cut -d"'" -f1`
 
 mysql -u kovi -e "USE ajto; INSERT INTO temperature VALUES(null, 0, $VAL, null, $VAL1, $VAL2, $PROCTEMP, '$LOGTEXT');"
+influx -database=loggers -execute "INSERT temperature room=$VAL,fridge=$VAL1,balcon=$VAL2,proc=$PROCTEMP"
 
 sleep 59
 done
