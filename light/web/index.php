@@ -18,7 +18,10 @@ echo '<!DOCTYPE html>
 <script type="text/javascript">
 
 function updateState(state){
-	$("#state").text(state).css("background-color", state == "0" ? "green" : "red");
+	$("#state")
+	.attr("data-state", state)
+	.text(state == "0" ? "off" : "on")
+	.css("background-color", state == "0" ? "green" : "red");
 }
 
 function getState(){
@@ -42,7 +45,7 @@ data: { "state": state }
 }
 
 function stateClick(element){
-	var originalState = $("#state").text();
+	var originalState = $("#state").attr("data-state");
 	$("#state").text("updating...").css("background-color", "lightgray");
 	if (originalState == "0") { setState("1"); } else {setState("0");}
 }
