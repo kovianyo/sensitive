@@ -1,0 +1,34 @@
+#!/bin/sh
+# /etc/init.d/light 
+
+### BEGIN INIT INFO
+# Provides:          light
+# Required-Start:    
+# Required-Stop:     
+# Default-Start:     2 3 4 5
+# Default-Stop:      0 1 6
+# Short-Description: Simple script to start a program at boot
+# Description:       A simple script from www.stuffaboutcode.com which will start / stop a program a boot / shutdown.
+### END INIT INFO
+
+# If you want a command to always run, put it here
+
+# Carry out specific functions when asked to by the system
+case "$1" in
+  start)
+    echo "Starting light"
+    # run application you want to start
+    /usr/bin/gpio export 7 out
+    /usr/bin/gpio -g write 7 1
+    ;;
+  stop)
+    echo "Stopping light"
+    /usr/bin/gpio unexport 7
+    ;;
+  *)
+    echo "Usage: /etc/init.d/light {start|stop}"
+    exit 1
+    ;;
+esac
+
+exit 0
