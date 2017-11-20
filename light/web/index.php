@@ -26,8 +26,18 @@ function updateState(state){
 	.css("background-color", state == "0" ? "green" : "red");
 }
 
+function onError(jqXHR, textStatus, errorThrown){
+	// console.log(textStatus);
+	// console.log(errorThrown);
+	
+	if (textStatus == "error" && errorThrown == "Unauthorized") {
+		window.location.href = "auth.php";
+	}
+
+}
+
 function getState(){
-	$.ajax({ url: "switch.php"})
+	$.ajax({ url: "switch.php", error: onError })
 	.done(function( result ) { 
 		console.log(result); 
 		updateState(result); 

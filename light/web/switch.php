@@ -1,5 +1,13 @@
 <?php
 
+session_start();
+
+if (!isset($_SESSION["username"]))
+{
+	header('HTTP/1.0 401 Unauthorized');
+	exit();
+}
+
 if (isset($_POST["state"]))
 {
 	if ($_POST["state"] == "0")
