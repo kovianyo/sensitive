@@ -67,6 +67,8 @@ function stateClick(element){
 $(function(){ 
 	$("#state").click(function(){ stateClick(); });
 	getState();  
+
+	$(window).focus(function(){ getState(); });
 });
 </script>
 ';
