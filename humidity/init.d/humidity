@@ -1,0 +1,36 @@
+#!/bin/sh
+# /etc/init.d/light 
+
+### BEGIN INIT INFO
+# Provides:          humidity
+# Required-Start:    
+# Required-Stop:     
+# Default-Start:     2 3 4 5
+# Default-Stop:      0 1 6
+# Short-Description: Simple script to start a program at boot
+# Description:       A simple script from www.stuffaboutcode.com which will start / stop a program a boot / shutdown.
+### END INIT INFO
+
+# sudo update-rc.d celeryd defaults
+# sudo update-rc.d celeryd enable
+
+# If you want a command to always run, put it here
+
+# Carry out specific functions when asked to by the system
+case "$1" in
+  start)
+    echo "Starting humidity"
+    # run application you want to start
+    /home/kovi/kovi/progs/humidity/humidity.sh &
+    ;;
+  stop)
+    echo "Stopping humidity"
+    killall humidity.sh
+    ;;
+  *)
+    echo "Usage: /etc/init.d/humidity {start|stop}"
+    exit 1
+    ;;
+esac
+
+exit 0
